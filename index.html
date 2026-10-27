@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gerador de PDF</title>
+<meta name="theme-color" content="#2f5bea">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Gerador PDF">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+  <h1>Gerador de PDF</h1>
+  <p class="sub">Envie imagens, arquivos de texto ou escreva algo. Tudo vira um PDF, direto no seu navegador.</p>
+
+  <label id="drop" tabindex="0">
+    <strong>Solte os arquivos aqui ou toque para escolher</strong>
+    <span>Imagens (JPG, PNG, WEBP, GIF) e texto (TXT, MD, CSV, JSON, HTML, CSS, JS)</span>
+    <input id="file" type="file" multiple accept="image/*,.txt,.md,.csv,.json,.html,.css,.js,.xml,.log,text/*">
+  </label>
+
+  <section>
+    <h2>Escrever texto</h2>
+    <textarea id="txt" placeholder="Digite ou cole o texto que deve entrar no PDF"></textarea>
+    <button id="addTxt" style="margin-top:8px">Adicionar texto</button>
+  </section>
+
+  <section>
+    <h2>Conteúdo do PDF</h2>
+    <ul id="list"></ul>
+    <p class="empty" id="empty">Nada adicionado ainda.</p>
+  </section>
+
+  <section>
+    <h2>Opções</h2>
+    <div class="opts">
+      <label>Página
+        <select id="size"><option value="a4">A4</option><option value="letter">Carta</option></select>
+      </label>
+      <label>Orientação
+        <select id="orient"><option value="p">Retrato</option><option value="l">Paisagem</option></select>
+      </label>
+      <label>Fonte <input id="fs" type="number" min="8" max="24" value="12"></label>
+      <label><input id="titles" type="checkbox" checked> Nome do arquivo como título</label>
+    </div>
+  </section>
+
+  <button class="main" id="gen" disabled>Gerar PDF</button>
+  <p id="msg" role="status"></p>
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>
