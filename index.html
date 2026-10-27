@@ -2,8 +2,9 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Gerador de PDF</title>
+<meta name="description" content="Transforme imagens e textos em PDF direto no navegador.">
 <meta name="theme-color" content="#2f5bea">
 <link rel="manifest" href="manifest.json">
 <link rel="icon" href="icon-192.png">
@@ -15,46 +16,62 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<main>
-  <h1>Gerador de PDF</h1>
-  <p class="sub">Envie imagens, arquivos de texto ou escreva algo. Tudo vira um PDF, direto no seu navegador.</p>
+<header class="hero">
+  <div class="wrap">
+    <img class="logo" src="icon-192.png" alt="" width="48" height="48">
+    <h1>Gerador de PDF</h1>
+    <p>Imagens e textos viram um PDF em segundos. Tudo acontece no seu aparelho, nada é enviado para a internet.</p>
+  </div>
+</header>
 
-  <label id="drop" tabindex="0">
-    <strong>Solte os arquivos aqui ou toque para escolher</strong>
-    <span>Imagens (JPG, PNG, WEBP, GIF) e texto (TXT, MD, CSV, JSON, HTML, CSS, JS)</span>
+<main class="wrap">
+  <label id="drop" class="card drop" tabindex="0">
+    <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 16V4m0 0L7.5 8.5M12 4l4.5 4.5M4 15v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></svg>
+    <strong>Solte os arquivos ou toque para escolher</strong>
+    <span>JPG, PNG, WEBP, GIF, TXT, MD, CSV, JSON, HTML, CSS, JS</span>
     <input id="file" type="file" multiple accept="image/*,.txt,.md,.csv,.json,.html,.css,.js,.xml,.log,text/*">
   </label>
 
-  <section>
+  <section class="card">
     <h2>Escrever texto</h2>
     <textarea id="txt" placeholder="Digite ou cole o texto que deve entrar no PDF"></textarea>
-    <button id="addTxt" style="margin-top:8px">Adicionar texto</button>
+    <button id="addTxt" class="btn">Adicionar texto</button>
   </section>
 
-  <section>
-    <h2>Conteúdo do PDF</h2>
+  <section class="card">
+    <div class="row"><h2>Conteúdo <span id="count" class="pill">0</span></h2><button id="clear" class="link" hidden>Limpar tudo</button></div>
     <ul id="list"></ul>
-    <p class="empty" id="empty">Nada adicionado ainda.</p>
+    <p class="empty" id="empty">Nenhum item ainda. Cada imagem ou texto vira uma página.</p>
   </section>
 
-  <section>
+  <section class="card">
     <h2>Opções</h2>
-    <div class="opts">
-      <label>Página
-        <select id="size"><option value="a4">A4</option><option value="letter">Carta</option></select>
-      </label>
-      <label>Orientação
-        <select id="orient"><option value="p">Retrato</option><option value="l">Paisagem</option></select>
-      </label>
-      <label>Fonte <input id="fs" type="number" min="8" max="24" value="12"></label>
-      <label><input id="titles" type="checkbox" checked> Nome do arquivo como título</label>
+    <div class="grid">
+      <label>Nome do arquivo <input id="name" type="text" value="documento" maxlength="60"></label>
+      <label>Página <select id="size"><option value="a4">A4</option><option value="letter">Carta</option></select></label>
+      <label>Orientação <select id="orient"><option value="p">Retrato</option><option value="l">Paisagem</option></select></label>
+      <label>Fonte (pt) <input id="fs" type="number" min="8" max="24" value="12"></label>
+    </div>
+    <label class="check"><input id="titles" type="checkbox" checked> Usar o nome do arquivo como título do texto</label>
+  </section>
+
+  <section id="result" class="card done" hidden>
+    <h2>PDF pronto ✓</h2>
+    <p id="resInfo" class="empty"></p>
+    <div class="acts">
+      <button id="dl" class="btn">Baixar</button>
+      <button id="share" class="btn primary" hidden>Compartilhar</button>
     </div>
   </section>
-
-  <button class="main" id="gen" disabled>Gerar PDF</button>
-  <p id="msg" role="status"></p>
 </main>
 
+<footer class="bar">
+  <div class="wrap">
+    <button id="install" class="btn" hidden>Instalar app</button>
+    <button id="gen" class="btn primary" disabled>Gerar PDF</button>
+  </div>
+</footer>
+<div id="toast" role="status" aria-live="polite"></div>
 <script src="script.js"></script>
 </body>
 </html>
